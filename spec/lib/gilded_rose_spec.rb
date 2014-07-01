@@ -69,6 +69,15 @@ describe GildedRose do
       end
     end
 
+    context 'maxmimum quality' do
+      let(:sell_in) { 5 }
+      let(:quality) { 49 }
+
+      it 'increases quality three times as fast' do
+        expect(subject.first.quality).to eq(50)
+      end
+    end
+
     context 'after the concert' do
       let(:sell_in) { 0 }
 
@@ -81,10 +90,10 @@ describe GildedRose do
   context 'Sulfuras Hand of Ragnaros' do
     let(:description) { 'Sulfuras, Hand of Ragnaros' }
     let(:sell_in) { 0 }
-    let(:quality) { 80 }
+    let(:quality) { 30 }
 
-    it 'never reduces quality' do
-      expect(subject.first.quality).to eq(80)
+    it 'never changes quality' do
+      expect(subject.first.quality).to eq(30)
     end
   end
 

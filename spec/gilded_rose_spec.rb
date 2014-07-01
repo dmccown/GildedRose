@@ -43,14 +43,38 @@ describe GildedRose do
 
   context 'Backstage passes' do
     let(:description) { 'Backstage passes to a TAFKAL80ETC concert' }
-    let(:sell_in) { 12 }
+    let(:sell_in) { 11 }
 
     it 'counts sell_in down' do
-      expect(subject.first.sell_in).to eq(11)
+      expect(subject.first.sell_in).to eq(10)
     end
 
     it 'increases quality' do
       expect(subject.first.quality).to eq(21)
+    end
+
+    context 'less than 10 days' do
+      let(:sell_in) { 10 }
+
+      it 'increases quality twice as fast' do
+        expect(subject.first.quality).to eq(22)
+      end
+    end
+
+    context 'less than 5 days' do
+      let(:sell_in) { 5 }
+
+      it 'increases quality three times as fast' do
+        expect(subject.first.quality).to eq(23)
+      end
+    end
+
+    context 'after the concert' do
+      let(:sell_in) { 0 }
+
+      it 'loses all quality' do
+        expect(subject.first.quality).to eq(0)
+      end
     end
   end
 
